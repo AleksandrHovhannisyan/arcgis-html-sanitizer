@@ -563,7 +563,8 @@ describe("Sanitizer", () => {
     expect(sanitizer.encodeAttrValue(alert)).toBe(encodedAlert);
   });
 
-  test("strip ignore tag", () => {
+  test("strip ignore tag", () =>  {
+    // FIXME: settings to true vs. false does not change the result of the test
     const sanitizer = new Sanitizer({stripIgnoreTag: true});
     const a = "Cows <5";
     const aExpected = "Cows &lt;5";
@@ -572,6 +573,6 @@ describe("Sanitizer", () => {
 
     expect(sanitizer.sanitize(a)).toBe(aExpected);
     expect(sanitizer.sanitize(b)).toBe(bExpected);
+    expect(sanitizer.sanitize("<0 or >1")).toBe("&lt;0 or &gt;1");
   });
-
 });
